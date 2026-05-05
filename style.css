@@ -4,19 +4,29 @@
     box-sizing: border-box;
 }
 
+
 body.dark-mode {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background:  linear-gradient common-20260506025744-363502-bc8d4-42b19e22d0b5c8b25e64.jpg
+    background-image: url("https://i.imgur.com/common-20260506025744-363502-bc8d4-42b19e22d0b5c8b25e64.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     color: #fff;
     min-height: 100vh;
 }
 
 body.light-mode {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+    background-image: url("https://i.imgur.com/common-20260506025744-363502-bc8d4-42b19e22d0b5c8b25e64.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     color: #333;
     min-height: 100vh;
 }
+
+
+
 
 header {
     text-align: center;
