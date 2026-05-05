@@ -10,9 +10,7 @@
 </head>
 <body>
     <header>
-        <h1>📸 My Pics</h1>
-<p>All your best moments in one place</p>
-
+        <h1>📸 My Photo Collection</h1>
         <p>Beautiful moments captured in time</p>
         
         <!-- Theme Toggle -->
@@ -35,62 +33,96 @@
             <input type="text" id="searchInput" placeholder="🔍 Search photos...">
         </div>
 
-        
         <!-- Category Buttons -->
-<div class="categories">
-    <button class="category-btn active" data-filter="all">All</button>
-    <button class="category-btn" data-filter="nature">Nature</button>
-    <button class="category-btn" data-filter="city">City</button>
-    <button class="category-btn" data-filter="people">People</button>
-    <button class="category-btn" data-filter="animal">Animals</button>
-    <button class="category-btn" data-filter="travel">Travel</button>
-</div>
+        <div class="categories">
+            <button class="category-btn active" data-filter="all">All</button>
+            <button class="category-btn" data-filter="nature">Nature</button>
+            <button class="category-btn" data-filter="city">City</button>
+            <button class="category-btn" data-filter="people">People</button>
+            <button class="category-btn" data-filter="animal">Animals</button>
+            <button class="category-btn" data-filter="travel">Travel</button>
+        </div>
+    </header>
 
-        </header> 
-    
-<div class="gallery-container">
+    <div class="gallery-container">
         <div class="gallery" id="gallery">
             <!-- Nature -->
-            <a href="https://source.unsplash.com/random/800x600?nature" data-lightbox="gallery" data-title="Nature View" class="item nature">
-                <img src="https://source.unsplash.com/random/400x300?nature" alt="Nature">
-            </a>
-            <a href="https://source.unsplash.com/random/800x600?mountain" data-lightbox="gallery" data-title="Mountains" class="item nature">
-                <img src="https://source.unsplash.com/random/400x300?mountain" alt="Mountain">
-            </a>
+            <div class="item-wrapper">
+                <a href="https://source.unsplash.com/random/800x600?nature" data-lightbox="gallery" data-title="Nature View" class="item nature">
+                    <img src="https://source.unsplash.com/random/400x300?nature" alt="Nature">
+                </a>
+                <button class="delete-btn"><i class="fas fa-trash"></i></button>
+            </div>
+            
+            <div class="item-wrapper">
+                <a href="https://source.unsplash.com/random/800x600?mountain" data-lightbox="gallery" data-title="Mountains" class="item nature">
+                    <img src="https://source.unsplash.com/random/400x300?mountain" alt="Mountain">
+                </a>
+                <button class="delete-btn"><i class="fas fa-trash"></i></button>
+            </div>
 
             <!-- City -->
-            <a href="https://source.unsplash.com/random/800x600?city" data-lightbox="gallery" data-title="City Life" class="item city">
-                <img src="https://source.unsplash.com/random/400x300?city" alt="City">
-            </a>
-            <a href="https://source.unsplash.com/random/800x600?architecture" data-lightbox="gallery" data-title="Architecture" class="item city">
-                <img src="https://source.unsplash.com/random/400x300?architecture" alt="Architecture">
-            </a>
+            <div class="item-wrapper">
+                <a href="https://source.unsplash.com/random/800x600?city" data-lightbox="gallery" data-title="City Life" class="item city">
+                    <img src="https://source.unsplash.com/random/400x300?city" alt="City">
+                </a>
+                <button class="delete-btn"><i class="fas fa-trash"></i></button>
+            </div>
+            
+            <div class="item-wrapper">
+                <a href="https://source.unsplash.com/random/800x600?architecture" data-lightbox="gallery" data-title="Architecture" class="item city">
+                    <img src="https://source.unsplash.com/random/400x300?architecture" alt="Architecture">
+                </a>
+                <button class="delete-btn"><i class="fas fa-trash"></i></button>
+            </div>
 
             <!-- People -->
-            <a href="https://source.unsplash.com/random/800x600?people" data-lightbox="gallery" data-title="People" class="item people">
-                <img src="https://source.unsplash.com/random/400x300?people" alt="People">
-            </a>
-            <a href="https://source.unsplash.com/random/800x600?portrait" data-lightbox="gallery" data-title="Portrait" class="item people">
-                <img src="https://source.unsplash.com/random/400x300?portrait" alt="Portrait">
-            </a>
+            <div class="item-wrapper">
+                <a href="https://source.unsplash.com/random/800x600?people" data-lightbox="gallery" data-title="People" class="item people">
+                    <img src="https://source.unsplash.com/random/400x300?people" alt="People">
+                </a>
+                <button class="delete-btn"><i class="fas fa-trash"></i></button>
+            </div>
+            
+            <div class="item-wrapper">
+                <a href="https://source.unsplash.com/random/800x600?portrait" data-lightbox="gallery" data-title="Portrait" class="item people">
+                    <img src="https://source.unsplash.com/random/400x300?portrait" alt="Portrait">
+                </a>
+                <button class="delete-btn"><i class="fas fa-trash"></i></button>
+            </div>
 
             <!-- Animals -->
-            <a href="https://source.unsplash.com/random/800x600?animal" data-lightbox="gallery" class="item animal">
-                <img src="https://source.unsplash.com/random/400x300?animal" alt="Animal">
-            </a>
-            <a href="https://source.unsplash.com/random/800x600?dog" data-lightbox="gallery" class="item animal">
-                <img src="https://source.unsplash.com/random/400x300?dog" alt="Dog">
-            </a>
+            <div class="item-wrapper">
+                <a href="https://source.unsplash.com/random/800x600?animal" data-lightbox="gallery" class="item animal">
+                    <img src="https://source.unsplash.com/random/400x300?animal" alt="Animal">
+                </a>
+                <button class="delete-btn"><i class="fas fa-trash"></i></button>
+            </div>
+            
+            <div class="item-wrapper">
+                <a href="https://source.unsplash.com/random/800x600?dog" data-lightbox="gallery" class="item animal">
+                    <img src="https://source.unsplash.com/random/400x300?dog" alt="Dog">
+                </a>
+                <button class="delete-btn"><i class="fas fa-trash"></i></button>
+            </div>
 
             <!-- Travel -->
-            <a href="https://source.unsplash.com/random/800x600?travel" data-lightbox="gallery" class="item travel">
-                <img src="https://source.unsplash.com/random/400x300?travel" alt="Travel">
-            </a>
-            <a href="https://source.unsplash.com/random/800x600?beach" data-lightbox="gallery" class="item travel">
-                <img src="https://source.unsplash.com/random/400x300?beach" alt="Beach">
-            </a>
+            <div class="item-wrapper">
+                <a href="https://source.unsplash.com/random/800x600?travel" data-lightbox="gallery" class="item travel">
+                    <img src="https://source.unsplash.com/random/400x300?travel" alt="Travel">
+                </a>
+                <button class="delete-btn"><i class="fas fa-trash"></i></button>
+            </div>
+            
+            <div class="item-wrapper">
+                <a href="https://source.unsplash.com/random/800x600?beach" data-lightbox="gallery" class="item travel">
+                    <img src="https://source.unsplash.com/random/400x300?beach" alt="Beach">
+                </a>
+                <button class="delete-btn"><i class="fas fa-trash"></i></button>
+            </div>
         </div>
     </div>
+
     <footer>
         <p>Made with ❤️ on GitHub Pages</p>
     </footer>
