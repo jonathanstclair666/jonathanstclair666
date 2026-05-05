@@ -4,10 +4,9 @@
     box-sizing: border-box;
 }
 
-
 body.dark-mode {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-image: url("https://i.imgur.com/common-20260506025744-363502-bc8d4-42b19e22d0b5c8b25e64.jpg");
+    background-image: url("https://i.imgur.com/7Z77yZL.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -17,7 +16,7 @@ body.dark-mode {
 
 body.light-mode {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-image: url("https://i.imgur.com/common-20260506025744-363502-bc8d4-42b19e22d0b5c8b25e64.jpg");
+    background-image: url("https://i.imgur.com/7Z77yZL.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -25,12 +24,12 @@ body.light-mode {
     min-height: 100vh;
 }
 
-
-
-
 header {
     text-align: center;
     padding: 40px 20px 20px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    margin: 20px;
 }
 
 header h1 {
@@ -119,14 +118,14 @@ body.light-mode .toggle-switch::before {
     border-radius: 30px;
     border: none;
     font-size: 1rem;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.2);
     color: #fff;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     outline: none;
 }
 
 #searchInput::placeholder {
-    color: #aaa;
+    color: #ddd;
 }
 
 .categories {
@@ -143,8 +142,8 @@ body.light-mode .toggle-switch::before {
     border: none;
     cursor: pointer;
     font-size: 0.9rem;
-    background: rgba(255, 255, 255, 0.1);
-    color: #ddd;
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
     transition: all 0.3s ease;
 }
 
@@ -170,8 +169,8 @@ body.light-mode .toggle-switch::before {
     position: relative;
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    background: rgba(255,255,255,0.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.4);
     padding-bottom: 15px;
 }
 
@@ -235,5 +234,6 @@ footer {
     text-align: center;
     padding: 40px 20px;
     margin-top: 50px;
-    color: #888;
+    color: #ccc;
+    background: rgba(0, 0, 0, 0.5);
 }
