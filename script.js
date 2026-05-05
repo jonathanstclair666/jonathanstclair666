@@ -41,9 +41,9 @@ filterButtons.forEach(button => {
         
         document.querySelectorAll('.item').forEach(item => {
             if (filterValue === 'all' || item.classList.contains(filterValue)) {
-                item.style.display = 'block';
+                item.parentElement.style.display = 'block';
             } else {
-                item.style.display = 'none';
+                item.parentElement.style.display = 'none';
             }
         });
     });
@@ -56,7 +56,7 @@ searchInput.addEventListener('keyup', (e) => {
     const searchTerm = e.target.value.toLowerCase();
     
     document.querySelectorAll('.item').forEach(item => {
-        const title = item.getAttribute('data-title') || '';
+        const title = item.getAttribute('alt') || '';
         if (title.toLowerCase().includes(searchTerm)) {
             item.parentElement.style.display = 'block';
         } else {
@@ -65,10 +65,11 @@ searchInput.addEventListener('keyup', (e) => {
     });
 });
 
-// =============== UPLOAD & SAVE FUNCTION ===============
+// =============== UPLOAD TO PUBLIC GALLERY ===============
 const fileInput = document.getElementById('fileInput');
 const gallery = document.getElementById('gallery');
 
+// Load existing images
 document.addEventListener('DOMContentLoaded', loadImages);
 
 fileInput.addEventListener('change', (e) => {
@@ -76,31 +77,55 @@ fileInput.addEventListener('change', (e) => {
     if(files.length === 0) return;
     
     Array.from(files).forEach(file => {
-        const reader = new FileReader();
-        reader.onload = function(event) {
-            saveImageToStorage(event.target.result);
-            addImageToGallery(event.target.result, 'My Uploaded Photo');
-        }
-        reader.readAsDataURL(file);
+        uploadImageToImgur(file);
     });
-    
-    alert('✅ Photos saved successfully!');
-    fileInput.value = '';
 });
 
-function saveImageToStorage(imageData) {
-    let images = JSON.parse(localStorage.getItem('galleryImages') || '[]');
-    images.push(imageData);
-    localStorage.setItem('galleryImages', JSON.stringify(images));
-}
+// Upload to Imgur
+function uploadImageToImgur(file) {
+    const formData = new FormData();
+    formData.append('image', file);
 
-function loadImages() {
-    let images = JSON.parse(localStorage.getItem('galleryImages') || '[]');
-    images.forEach((imgData, index) => {
-        addImageToGallery(imgData, 'My Photo ' + (index + 1));
+    fetch('https://api.imgur.com/3/image', {
+        method: 'POST',
+        headers: {
+            'Authorization': 'Client-ID 85a78887993c44c'
+        },
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if(data.success) {
+            const imageUrl = data.data.link;
+            saveImageUrl(imageUrl);
+            addImageToGallery(imageUrl, 'User Upload');
+            alert('✅ Picture uploaded successfully! Everyone can see it now!');
+        } else {
+            alert('❌ Upload failed. Try again.');
+        }
+    })
+    .catch(error => {
+        alert('❌ Error uploading.');
+        console.error(error);
     });
 }
 
+// Save URL to localStorage so it stays
+function saveImageUrl(url) {
+    let images = JSON.parse(localStorage.getItem('publicGallery') || '[]');
+    images.push(url);
+    localStorage.setItem('publicGallery', JSON.stringify(images));
+}
+
+// Load images
+function loadImages() {
+    let images = JSON.parse(localStorage.getItem('publicGallery') || '[]');
+    images.forEach(url => {
+        addImageToGallery(url, 'Shared Photo');
+    });
+}
+
+// Add image to page
 function addImageToGallery(imageData, title) {
     const newItem = document.createElement('div');
     newItem.classList.add('item-wrapper');
@@ -109,11 +134,11 @@ function addImageToGallery(imageData, title) {
     link.href = imageData;
     link.setAttribute('data-lightbox', 'gallery');
     link.setAttribute('data-title', title);
-    link.classList.add('item', 'nature');
     
     const img = document.createElement('img');
     img.src = imageData;
     img.alt = title;
+    img.classList.add('item', 'nature');
     
     link.appendChild(img);
     
@@ -132,10 +157,10 @@ function addImageToGallery(imageData, title) {
     gallery.appendChild(newItem);
 }
 
-function removeImageFromStorage(imageData) {
-    let images = JSON.parse(localStorage.getItem('galleryImages') || '[]');
-    images = images.filter(img => img !== imageData);
-    localStorage.setItem('galleryImages', JSON.stringify(images));
+function removeImageFromStorage(url) {
+    let images = JSON.parse(localStorage.getItem('publicGallery') || '[]');
+    images = images.filter(img => img !== url);
+    localStorage.setItem('publicGallery', JSON.stringify(images));
 }
 
-console.log('✅ Gallery Ready!');
+console.log('🌍 PUBLIC GALLERY READY!');
