@@ -163,7 +163,7 @@ body.light-mode #searchInput::placeholder { color: #777; }
     justify-content: center;
     flex-wrap: wrap;
     gap: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 
 .category-btn {
@@ -197,7 +197,7 @@ body.light-mode .category-btn.active {
     font-weight: bold;
 }
 
-/* ================= GALLERY ================= */
+/* ================= GALLERY GRID ================= */
 .gallery-container {
     max-width: 1400px;
     margin: 0 auto;
@@ -214,22 +214,12 @@ body.light-mode .category-btn.active {
     position: relative;
     border-radius: 12px;
     overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 .item {
     display: block;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
-    opacity: 0;
-    transform: translateY(20px);
-}
-
-.item.show {
-    opacity: 1;
-    transform: translateY(0);
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    transition: transform 0.3s ease;
 }
 
 .item img {
@@ -240,21 +230,8 @@ body.light-mode .category-btn.active {
     transition: transform 0.4s ease;
 }
 
-body.dark-mode .item:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 10px 25px rgba(0, 245, 160, 0.2);
-}
-body.light-mode .item:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 10px 25px rgba(230, 30, 134, 0.2);
-}
-
-.item:hover img {
+.item-wrapper:hover .item img {
     transform: scale(1.05);
-}
-
-.item.hide {
-    display: none;
 }
 
 /* ================= DELETE BUTTON ================= */
