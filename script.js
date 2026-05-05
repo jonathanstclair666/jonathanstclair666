@@ -31,7 +31,6 @@ toggleSwitch.addEventListener('click', () => {
 
 // =============== CATEGORY FILTER ===============
 const filterButtons = document.querySelectorAll('.category-btn');
-const items = document.querySelectorAll('.item');
 
 filterButtons.forEach(button => {
     button.addEventListener('click', () => {
@@ -42,9 +41,9 @@ filterButtons.forEach(button => {
         
         document.querySelectorAll('.item').forEach(item => {
             if (filterValue === 'all' || item.classList.contains(filterValue)) {
-                item.classList.remove('hide');
+                item.style.display = 'block';
             } else {
-                item.classList.add('hide');
+                item.style.display = 'none';
             }
         });
     });
@@ -59,37 +58,17 @@ searchInput.addEventListener('keyup', (e) => {
     document.querySelectorAll('.item').forEach(item => {
         const title = item.getAttribute('data-title') || '';
         if (title.toLowerCase().includes(searchTerm)) {
-            item.classList.remove('hide');
+            item.parentElement.style.display = 'block';
         } else {
-            item.classList.add('hide');
+            item.parentElement.style.display = 'none';
         }
     });
-});
-
-// =============== LAZY LOAD / FADE IN ===============
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: "0px 0px -50px 0px"
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if(entry.isIntersecting) {
-            entry.target.classList.add('show');
-        }
-    });
-}, observerOptions);
-
-// Observe existing items
-document.querySelectorAll('.item').forEach(item => {
-    observer.observe(item);
 });
 
 // =============== UPLOAD & SAVE FUNCTION ===============
 const fileInput = document.getElementById('fileInput');
 const gallery = document.getElementById('gallery');
 
-// Load saved images when page opens
 document.addEventListener('DOMContentLoaded', loadImages);
 
 fileInput.addEventListener('change', (e) => {
@@ -99,9 +78,7 @@ fileInput.addEventListener('change', (e) => {
     Array.from(files).forEach(file => {
         const reader = new FileReader();
         reader.onload = function(event) {
-            // Save to Local Storage
             saveImageToStorage(event.target.result);
-            // Display on page
             addImageToGallery(event.target.result, 'My Uploaded Photo');
         }
         reader.readAsDataURL(file);
@@ -111,14 +88,12 @@ fileInput.addEventListener('change', (e) => {
     fileInput.value = '';
 });
 
-// Save image data to browser storage
 function saveImageToStorage(imageData) {
     let images = JSON.parse(localStorage.getItem('galleryImages') || '[]');
     images.push(imageData);
     localStorage.setItem('galleryImages', JSON.stringify(images));
 }
 
-// Load images from storage
 function loadImages() {
     let images = JSON.parse(localStorage.getItem('galleryImages') || '[]');
     images.forEach((imgData, index) => {
@@ -126,12 +101,10 @@ function loadImages() {
     });
 }
 
-// Add image element to gallery WITH DELETE BUTTON
 function addImageToGallery(imageData, title) {
     const newItem = document.createElement('div');
     newItem.classList.add('item-wrapper');
     
-    // Create the image link
     const link = document.createElement('a');
     link.href = imageData;
     link.setAttribute('data-lightbox', 'gallery');
@@ -141,11 +114,9 @@ function addImageToGallery(imageData, title) {
     const img = document.createElement('img');
     img.src = imageData;
     img.alt = title;
-    img.loading = 'lazy';
     
     link.appendChild(img);
     
-    // Create Delete Button
     const deleteBtn = document.createElement('button');
     deleteBtn.classList.add('delete-btn');
     deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
@@ -159,15 +130,12 @@ function addImageToGallery(imageData, title) {
     newItem.appendChild(link);
     newItem.appendChild(deleteBtn);
     gallery.appendChild(newItem);
-    
-    observer.observe(newItem);
 }
 
-// Remove image from storage
 function removeImageFromStorage(imageData) {
     let images = JSON.parse(localStorage.getItem('galleryImages') || '[]');
     images = images.filter(img => img !== imageData);
     localStorage.setItem('galleryImages', JSON.stringify(images));
 }
 
-console.log('🚀 GALLERY PRO MAX - READY!');
+console.log('✅ Gallery Ready!');
