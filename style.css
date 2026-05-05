@@ -4,25 +4,20 @@
     box-sizing: border-box;
 }
 
-/* ================= DARK MODE (DEFAULT) ================= */
 body.dark-mode {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(135deg, #1a1a2e, #16213e);
     color: #fff;
     min-height: 100vh;
-    transition: background 0.5s ease, color 0.5s ease;
 }
 
-/* ================= LIGHT MODE ================= */
 body.light-mode {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
     color: #333;
     min-height: 100vh;
-    transition: background 0.5s ease, color 0.5s ease;
 }
 
-/* ================= HEADER ================= */
 header {
     text-align: center;
     padding: 40px 20px 20px;
@@ -31,16 +26,7 @@ header {
 header h1 {
     font-size: 2.8rem;
     margin-bottom: 10px;
-}
-
-body.dark-mode header h1 {
     background: linear-gradient(to right, #00f5a0, #00d9f5);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-body.light-mode header h1 {
-    background: linear-gradient(to right, #e61e86, #ff7e5f);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -48,12 +34,9 @@ body.light-mode header h1 {
 header p {
     font-size: 1.1rem;
     margin-bottom: 15px;
+    color: #ccc;
 }
 
-body.dark-mode header p { color: #ccc; }
-body.light-mode header p { color: #555; }
-
-/* ================= THEME TOGGLE ================= */
 .theme-toggle {
     display: flex;
     align-items: center;
@@ -61,10 +44,8 @@ body.light-mode header p { color: #555; }
     gap: 10px;
     margin-bottom: 20px;
     font-size: 1.2rem;
+    color: #ddd;
 }
-
-body.dark-mode .theme-toggle { color: #ddd; }
-body.light-mode .theme-toggle { color: #666; }
 
 .toggle-switch {
     width: 50px;
@@ -73,11 +54,6 @@ body.light-mode .theme-toggle { color: #666; }
     border-radius: 25px;
     position: relative;
     cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-body.light-mode .toggle-switch {
-    background: #ffd700;
 }
 
 .toggle-switch::before {
@@ -92,11 +68,14 @@ body.light-mode .toggle-switch {
     transition: transform 0.3s ease;
 }
 
+body.light-mode .toggle-switch {
+    background: #ffd700;
+}
+
 body.light-mode .toggle-switch::before {
     transform: translateX(25px);
 }
 
-/* ================= UPLOAD BUTTON ================= */
 .upload-container {
     margin: 20px 0;
 }
@@ -110,24 +89,15 @@ body.light-mode .toggle-switch::before {
     font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-body.dark-mode .upload-btn {
     background: linear-gradient(to right, #00f5a0, #00d9f5);
     color: #000;
-}
-body.light-mode .upload-btn {
-    background: linear-gradient(to right, #ff7e5f, #e61e86);
-    color: #fff;
+    transition: transform 0.3s ease;
 }
 
 .upload-btn:hover {
     transform: scale(1.05);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
-/* ================= SEARCH BAR ================= */
 .search-container {
     max-width: 400px;
     margin: 0 auto 20px;
@@ -139,25 +109,16 @@ body.light-mode .upload-btn {
     border-radius: 30px;
     border: none;
     font-size: 1rem;
-    outline: none;
-    transition: all 0.3s ease;
-}
-
-body.dark-mode #searchInput {
     background: rgba(255, 255, 255, 0.1);
     color: #fff;
     border: 1px solid rgba(255, 255, 255, 0.2);
-}
-body.light-mode #searchInput {
-    background: rgba(0, 0, 0, 0.05);
-    color: #333;
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    outline: none;
 }
 
-body.dark-mode #searchInput::placeholder { color: #aaa; }
-body.light-mode #searchInput::placeholder { color: #777; }
+#searchInput::placeholder {
+    color: #aaa;
+}
 
-/* ================= CATEGORIES ================= */
 .categories {
     display: flex;
     justify-content: center;
@@ -172,36 +133,21 @@ body.light-mode #searchInput::placeholder { color: #777; }
     border: none;
     cursor: pointer;
     font-size: 0.9rem;
+    background: rgba(255, 255, 255, 0.1);
+    color: #ddd;
     transition: all 0.3s ease;
 }
 
-body.dark-mode .category-btn {
-    background: rgba(255, 255, 255, 0.1);
-    color: #ddd;
-}
-body.light-mode .category-btn {
-    background: rgba(0, 0, 0, 0.08);
-    color: #444;
-}
-
-body.dark-mode .category-btn:hover, 
-body.dark-mode .category-btn.active {
+.category-btn.active, .category-btn:hover {
     background: linear-gradient(to right, #00f5a0, #00d9f5);
     color: #000;
     font-weight: bold;
 }
-body.light-mode .category-btn:hover, 
-body.light-mode .category-btn.active {
-    background: linear-gradient(to right, #ff7e5f, #e61e86);
-    color: #fff;
-    font-weight: bold;
-}
 
-/* ================= GALLERY GRID ================= */
 .gallery-container {
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 0 20px;
 }
 
 .gallery {
@@ -215,29 +161,19 @@ body.light-mode .category-btn.active {
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    background: rgba(255,255,255,0.05);
 }
 
 .item {
-    display: block;
-    transition: transform 0.3s ease;
-}
-
-.item img {
     width: 100%;
-    height: 100%;
+    height: 250px;
     object-fit: cover;
     display: block;
     transition: transform 0.4s ease;
 }
 
-.item-wrapper:hover .item img {
+.item:hover {
     transform: scale(1.05);
-}
-
-/* ================= DELETE BUTTON ================= */
-.item-wrapper:hover .delete-btn {
-    opacity: 1;
-    visibility: visible;
 }
 
 .delete-btn {
@@ -256,42 +192,16 @@ body.light-mode .category-btn.active {
     align-items: center;
     justify-content: center;
     opacity: 0;
-    visibility: hidden;
     transition: opacity 0.3s ease;
-    z-index: 10;
 }
 
-.delete-btn:hover {
-    background: red;
-    transform: scale(1.1);
+.item-wrapper:hover .delete-btn {
+    opacity: 1;
 }
 
-/* ================= FOOTER ================= */
 footer {
     text-align: center;
     padding: 40px 20px;
     margin-top: 50px;
-}
-body.dark-mode footer { color: #888; }
-body.light-mode footer { color: #666; }
-
-/* ================= RESPONSIVE ================= */
-@media (max-width: 768px) {
-    .gallery {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        gap: 10px;
-    }
-    
-    header h1 {
-        font-size: 2rem;
-    }
-
-    .categories {
-        gap: 5px;
-    }
-
-    .category-btn {
-        padding: 8px 12px;
-        font-size: 0.8rem;
-    }
+    color: #888;
 }
