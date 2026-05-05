@@ -6,7 +6,7 @@
 
 body.dark-mode {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-image: url("common-20260506025744-363502-bc8d4-42b19e22d0b5c8b25e64.jpg");
+    background-image: url("./common-20260506025744-363502-bc8d4-42b19e22d0b5c8b25e64.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -16,7 +16,7 @@ body.dark-mode {
 
 body.light-mode {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-image: url("common-20260506025744-363502-bc8d4-42b19e22d0b5c8b25e64.jpg");
+    background-image: url("./common-20260506025744-363502-bc8d4-42b19e22d0b5c8b25e64.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
