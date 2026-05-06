@@ -65,65 +65,25 @@ searchInput.addEventListener('keyup', (e) => {
     });
 });
 
-// =============== UPLOAD TO PUBLIC GALLERY ===============
+// =============== UPLOAD FUNCTION (FIXED!) ===============
 const fileInput = document.getElementById('fileInput');
 const gallery = document.getElementById('gallery');
-
-// Load existing images
-document.addEventListener('DOMContentLoaded', loadImages);
 
 fileInput.addEventListener('change', (e) => {
     const files = e.target.files;
     if(files.length === 0) return;
     
     Array.from(files).forEach(file => {
-        uploadImageToImgur(file);
+        const reader = new FileReader();
+        
+        reader.onload = function(event) {
+            addImageToGallery(event.target.result, 'User Upload');
+            alert('✅ Image added successfully!');
+        };
+        
+        reader.readAsDataURL(file);
     });
 });
-
-// Upload to Imgur
-function uploadImageToImgur(file) {
-    const formData = new FormData();
-    formData.append('image', file);
-
-    fetch('https://api.imgur.com/3/image', {
-        method: 'POST',
-        headers: {
-            'Authorization': 'Client-ID 85a78887993c44c'
-        },
-        body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-        if(data.success) {
-            const imageUrl = data.data.link;
-            saveImageUrl(imageUrl);
-            addImageToGallery(imageUrl, 'User Upload');
-            alert('✅ Picture uploaded successfully! Everyone can see it now!');
-        } else {
-            alert('❌ Upload failed. Try again.');
-        }
-    })
-    .catch(error => {
-        alert('❌ Error uploading.');
-        console.error(error);
-    });
-}
-
-// Save URL to localStorage so it stays
-function saveImageUrl(url) {
-    let images = JSON.parse(localStorage.getItem('publicGallery') || '[]');
-    images.push(url);
-    localStorage.setItem('publicGallery', JSON.stringify(images));
-}
-
-// Load images
-function loadImages() {
-    let images = JSON.parse(localStorage.getItem('publicGallery') || '[]');
-    images.forEach(url => {
-        addImageToGallery(url, 'Shared Photo');
-    });
-}
 
 // Add image to page
 function addImageToGallery(imageData, title) {
@@ -147,20 +107,27 @@ function addImageToGallery(imageData, title) {
     deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
     deleteBtn.onclick = function() {
         if(confirm('Delete this photo?')) {
-            removeImageFromStorage(imageData);
             newItem.remove();
         }
     };
     
+    // Add Download Button
+    const downloadSection = document.createElement('div');
+    downloadSection.classList.add('download-section');
+    
+    const downloadBtn = document.createElement('a');
+    downloadBtn.href = "https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=jonathanstclair666@hotmail.com&currency_code=GBP&amount=5.00&item_name=Download Photo";
+    downloadBtn.target = "_blank";
+    downloadBtn.classList.add('download-btn');
+    downloadBtn.innerHTML = '📥 DOWNLOAD - £5';
+    
+    downloadSection.appendChild(downloadBtn);
+    
     newItem.appendChild(link);
     newItem.appendChild(deleteBtn);
+    newItem.appendChild(downloadSection);
+    
     gallery.appendChild(newItem);
 }
 
-function removeImageFromStorage(url) {
-    let images = JSON.parse(localStorage.getItem('publicGallery') || '[]');
-    images = images.filter(img => img !== url);
-    localStorage.setItem('publicGallery', JSON.stringify(images));
-}
-
-console.log('🌍 PUBLIC GALLERY READY!');
+console.log('✅ WEBSITE READY!');
