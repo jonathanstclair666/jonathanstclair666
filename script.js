@@ -65,69 +65,64 @@ searchInput.addEventListener('keyup', (e) => {
     });
 });
 
-// =============== UPLOAD FUNCTION (FIXED!) ===============
+// =============== UPLOAD FUNCTION (100% WORKING) ===============
 const fileInput = document.getElementById('fileInput');
 const gallery = document.getElementById('gallery');
 
-fileInput.addEventListener('change', (e) => {
+fileInput.addEventListener('change', function(e) {
     const files = e.target.files;
     if(files.length === 0) return;
     
-    Array.from(files).forEach(file => {
+    for(let i = 0; i < files.length; i++) {
         const reader = new FileReader();
         
         reader.onload = function(event) {
-            addImageToGallery(event.target.result, 'User Upload');
+            const newItem = document.createElement('div');
+            newItem.classList.add('item-wrapper');
+            
+            const link = document.createElement('a');
+            link.href = event.target.result;
+            link.setAttribute('data-lightbox', 'gallery');
+            link.setAttribute('data-title', 'User Upload');
+            
+            const img = document.createElement('img');
+            img.src = event.target.result;
+            img.alt = 'User Upload';
+            img.classList.add('item', 'nature');
+            
+            link.appendChild(img);
+            
+            const deleteBtn = document.createElement('button');
+            deleteBtn.classList.add('delete-btn');
+            deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
+            deleteBtn.onclick = function() {
+                if(confirm('Delete this photo?')) {
+                    newItem.remove();
+                }
+            };
+            
+            const downloadSection = document.createElement('div');
+            downloadSection.classList.add('download-section');
+            
+            const downloadBtn = document.createElement('a');
+            downloadBtn.href = "https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=jonathanstclair666@hotmail.com&currency_code=GBP&amount=5.00&item_name=Download Photo";
+            downloadBtn.target = "_blank";
+            downloadBtn.classList.add('download-btn');
+            downloadBtn.innerHTML = '📥 DOWNLOAD - £5';
+            
+            downloadSection.appendChild(downloadBtn);
+            
+            newItem.appendChild(link);
+            newItem.appendChild(deleteBtn);
+            newItem.appendChild(downloadSection);
+            
+            gallery.appendChild(newItem);
+            
             alert('✅ Image added successfully!');
         };
         
-        reader.readAsDataURL(file);
-    });
+        reader.readAsDataURL(files[i]);
+    }
 });
 
-// Add image to page
-function addImageToGallery(imageData, title) {
-    const newItem = document.createElement('div');
-    newItem.classList.add('item-wrapper');
-    
-    const link = document.createElement('a');
-    link.href = imageData;
-    link.setAttribute('data-lightbox', 'gallery');
-    link.setAttribute('data-title', title);
-    
-    const img = document.createElement('img');
-    img.src = imageData;
-    img.alt = title;
-    img.classList.add('item', 'nature');
-    
-    link.appendChild(img);
-    
-    const deleteBtn = document.createElement('button');
-    deleteBtn.classList.add('delete-btn');
-    deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
-    deleteBtn.onclick = function() {
-        if(confirm('Delete this photo?')) {
-            newItem.remove();
-        }
-    };
-    
-    // Add Download Button
-    const downloadSection = document.createElement('div');
-    downloadSection.classList.add('download-section');
-    
-    const downloadBtn = document.createElement('a');
-    downloadBtn.href = "https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=jonathanstclair666@hotmail.com&currency_code=GBP&amount=5.00&item_name=Download Photo";
-    downloadBtn.target = "_blank";
-    downloadBtn.classList.add('download-btn');
-    downloadBtn.innerHTML = '📥 DOWNLOAD - £5';
-    
-    downloadSection.appendChild(downloadBtn);
-    
-    newItem.appendChild(link);
-    newItem.appendChild(deleteBtn);
-    newItem.appendChild(downloadSection);
-    
-    gallery.appendChild(newItem);
-}
-
-console.log('✅ WEBSITE READY!');
+console.log('✅ READY TO UPLOAD!');
